@@ -4,8 +4,8 @@ import s from './Goods.module.scss'
 
 
 export const Goods = () => (
-    <section>
-        <Container className={s.goods}>
+    <section className={s.goods}>
+        <Container >
             <h2 className={`${s.title} visually-hidden`}>Product list</h2>
 
             <ul className={s.list}>
