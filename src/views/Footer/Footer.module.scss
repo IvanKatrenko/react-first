@@ -27,7 +27,7 @@
 .logo {
     width: 230px;
 
-    @media(min-height: 580px) { 
+    @media(min-width: 580px) { 
         grid-column: 1 / 2;
     }
 
@@ -36,21 +36,20 @@
     }
 }
 
-
 .developers {
-    @media(min-height: 580px) {
+    @media(min-width: 580px) {
     grid-column: 1 / 2;
     }
 }
 
 .contacts {
-    @media(min-height: 580px) {
+    @media(min-width: 580px) {
     grid-column: 2 / 3;
     }
 }
 
 .copyright {
-    @media(min-height: 580px) {
+    @media(min-width: 580px) {
         grid-column: 1 / 2;
         }
 }

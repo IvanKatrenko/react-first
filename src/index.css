@@ -91,3 +91,11 @@ h1,h2,h3,p,figure,fieldset {
   position: fixed;
   transform: scale(0);
 }
+
+main {
+  padding-bottom: 80px;
+
+  @media (media-width: 820px) {
+  padding-bottom: 100px;
+  }
+}
