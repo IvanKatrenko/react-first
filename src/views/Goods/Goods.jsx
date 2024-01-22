@@ -1,4 +1,4 @@
-import { Container } from '../../views/Goods/Goods'
+import { Container } from '../../views/Container/Container'
 import { CardItem } from '../../components/CardItem/CardItem'
 import s from './Goods.module.scss'
 import { useEffect } from 'react';

@@ -1,25 +1,25 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const fetchCategories = createAsyncThunk(
-    'categories/fetchCategories',
-    async (_, thunkAPI) => {
+
+export const fetchProduct = createAsyncThunk(
+    'product/fetchProduct',
+    async (id, thunkAPI) => {
         const state = thunkAPI.getState();
         const token = state.auth.accessToken;
-        const response = await fetch(`${API_URL}api/productCategories`,
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
+        const response = await fetch(`${API_URL}api/product/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
         if (!response.ok) {
             if (response.status === 401) {
                 return thunkAPI.rejectWithValue({
                     status: response.status,
-                    error: 'Failed to get directory !'
+                    error: 'Failed to get thing !'
                 })
             }
-            throw new Error('Failed to get directory')
+            throw new Error('Failed to get thing')
         }
 
         return response.json();
@@ -27,27 +27,27 @@ export const fetchCategories = createAsyncThunk(
 )
 
 const initialState = {
-    data: [],
+    data: null,
     loading: false,
     error: null,
 }
 
-const categoriesSlice = createSlice({
-    name: 'categories',
+const productsSlice = createSlice({
+    name: 'product',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchCategories.pending, (state) => {
+            .addCase(fetchProduct.pending, (state) => {
                 state.loading = true;
                 state.loading = null;
             })
-            .addCase(fetchCategories.fulfilled, (state, action) => {
+            .addCase(fetchProduct.fulfilled, (state, action) => {
                 state.data = action.payload;
                 state.loading = false;
                 state.loading = null;
             })
-            .addCase(fetchCategories.rejected, (state, action) => {
+            .addCase(fetchProduct.rejected, (state, action) => {
 
                 state.loading = true;
                 state.loading = action.error.message;
@@ -55,4 +55,4 @@ const categoriesSlice = createSlice({
     }
 })
 
-export default categoriesSlice.reducer;
+export default productSlice.reducer;

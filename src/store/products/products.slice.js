@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+
 export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
     async (_, thunkAPI) => {
@@ -12,6 +13,12 @@ export const fetchProducts = createAsyncThunk(
         })
 
         if (!response.ok) {
+            if (response.status === 401) {
+                return thunkAPI.rejectWithValue({
+                    status: response.status,
+                    error: 'Failed to get product !'
+                })
+            }
             throw new Error('Failed to get product')
         }
 

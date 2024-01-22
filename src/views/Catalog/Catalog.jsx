@@ -1,5 +1,5 @@
 
-import { Container } from '../../views/Goods/Goods'
+import { Container } from '../../views/Container/Container'
 import s from './Catalog.module.scss';
 import { useDispatch } from 'react-redux';
 
