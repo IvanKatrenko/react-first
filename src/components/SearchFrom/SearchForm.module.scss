@@ -17,13 +17,16 @@
     outline: none;
 
 
- &::placeholder {
+    &::placeholder {
     color: #969eae;
 }
 
-&:focus-visible,
-&:hover {
+    &:focus-visible,
+    &:hover {
     border-color: #DFE3EB;
+    }
+    &::-webkit-search-cancel-button{
+        display: none;
     }
 }
 

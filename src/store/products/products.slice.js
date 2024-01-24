@@ -1,12 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+import { API_URL } from '../../const';
 
 export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
-    async (_, thunkAPI) => {
+    async (param, thunkAPI) => {
         const state = thunkAPI.getState();
         const token = state.auth.accessToken;
-        const response = await fetch(`${API_URL}api/products`, {
+
+        const queryParams = new URLSearchParams();
+
+        if (param) {
+            for (const key in param) {
+                if (Object.hasOwnProperty.call(param, key) && param[key]) { //проверяем наличие param key 
+                    queryParams.append(key, param[key]) //добавялем
+                }
+            }
+        }
+
+        const response = await fetch(`${API_URL}api/products?${queryParams}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -30,6 +41,7 @@ const initialState = {
     data: [],
     loading: false,
     error: null,
+    pagination: null,
 }
 
 const productsSlice = createSlice({
@@ -41,9 +53,16 @@ const productsSlice = createSlice({
             .addCase(fetchProducts.pending, (state) => {
                 state.loading = true;
                 state.loading = null;
+                state.pagination = null;
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
-                state.data = action.payload;
+                if (Array.isArray(action.payload)) {
+                    state.data = action.payload;
+                    state.pagination = null;
+                } else {
+                    state.data = action.payload.data;
+                    state.pagination = action.pagination;
+                }
                 state.loading = false;
                 state.loading = null;
             })
@@ -51,6 +70,7 @@ const productsSlice = createSlice({
 
                 state.loading = true;
                 state.loading = action.error.message;
+                state.pagination = null;
             })
     }
 })
