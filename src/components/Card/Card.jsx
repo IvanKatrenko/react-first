@@ -19,17 +19,17 @@ export const Card = () => {
 
     if (loading) return <div>Loading ... </div>
     if (error) return <div> Error: {error}</div>
-    if (!data) return <div> product not found please try later</div>
+    if (!data) return <div> Product not found please try later</div>
 
     return (
         <section className={s.card}>
             <Container className={s.container}>
-                <h2 className={s.title}>Armchair with armrests</h2>
+                <h2 className={s.title}>{data.name}</h2>
 
                 <Slider data={data} />
                 <div className={s.info}>
-                    <p className={s.price}>{'5000'.toLocaleString()}&nbsp;  ₽ </p>
-                    <p className={s.article}>арт. 84348945757</p>
+                    <p className={s.price}>{data.price.toLocaleString()}&nbsp;  ₽ </p>
+                    <p className={s.article}>арт. {data.article}</p>
 
                     <div >
                         <h3 className={s.characteristicsTitle}>
