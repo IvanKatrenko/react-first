@@ -6,7 +6,7 @@ import s from './Slider.module.scss';
 
 export const Slider = ({ data }) => {
     const [mainSwiper, setMainSwiper] = useState(null)
-    const [thumbswiper, setThumbsSwiper] = useState(null)
+    const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
     return (
         <div className={s.picture}>

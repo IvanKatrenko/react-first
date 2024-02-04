@@ -3,7 +3,7 @@ import s from './Pagination.module.scss';
 
 export const Pagination = ({ pagination }) => {
 
-    const { currentPage, totalProducts, limit } = pagination;
+    const { currentPage, totalProducts, limit, totalPages } = pagination;
     const location = useLocation();
     const [searchParam] = useSearchParams();
 
@@ -19,12 +19,13 @@ export const Pagination = ({ pagination }) => {
     const nextPageNumber = currentPageNumber + 1;
 
     const prevPageUrl = prevPageNumber > 0 ? createPageUrl(prevPageNumber) : ''
-    const nextPageUrl = nextPageNumber <= Math.cell(totalProducts / limit) ? createPageUrl(nextPageNumber) : '';
+    const nextPageUrl =
+        nextPageNumber <= totalPages ? createPageUrl(nextPageNumber) : '';
 
     //для бара
-    const width = currentPage * limit;
-    const paginationCurrent =
-        totalProducts === limit
+    const width = currentPage * limit; // currentPage это текущая страница
+    const paginationCurrent = // cоздаем переменныую и мы проверяем
+        totalProducts === limit // если к-во товаров равно лимит,тогда мы отобразим totalProducts
             ? totalProducts
             : width < totalProducts
                 ? width

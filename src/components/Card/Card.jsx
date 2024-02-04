@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchProduct } from '../../store/product/product.slice';
 import { FavoriteButton } from '../FavoriteButton/FavoriteButton';
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 export const Card = () => {
 
